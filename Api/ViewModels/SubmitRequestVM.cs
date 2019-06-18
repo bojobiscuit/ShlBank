@@ -11,7 +11,8 @@ namespace Api.ViewModels
         public List<string> SubmittedNames { get; set; }
         public List<string> ErrorNames { get; set; }
         public List<UserAccountDto> MatchingUsers { get; set; }
-        public GroupRequestDto Request { get; set; }
+        public NewGroupRequestDto Request { get; set; }
         public int? SubmittedRequestId { get; set; }
+        public string Message { get; set; }
     }
 }

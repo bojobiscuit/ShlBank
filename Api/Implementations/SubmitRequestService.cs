@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
-using Repository.Dtos;
 using Repository.Interfaces;
 using Api.Interfaces;
 using Api.ViewModels;
+using System.Linq;
 
 namespace Api.Implementations
 {
@@ -52,10 +51,14 @@ namespace Api.Implementations
             if (userAccount == null)
                 return null;
 
-            if (IsValid(requestVM.Request))
+            if (requestVM.Request.IsValid())
             {
                 int? submittedRequestId = _bankRepository.SubmitRequest(requestVM.Request);
                 requestVM.SubmittedRequestId = submittedRequestId;
+            }
+            else
+            {
+                requestVM.Message = "The Request was not valid";
             }
 
             return requestVM;
@@ -65,16 +68,13 @@ namespace Api.Implementations
         {
             List<string> errorNames = new List<string>();
 
-            // TODO: Implement
+            foreach (var name in submitRequest.MatchingUsers.Select(x => x.UserName))
+            {
+                if (!submitRequest.SubmittedNames.Contains(name))
+                    errorNames.Add(name);
+            }
 
             return errorNames;
-        }
-
-        private bool IsValid(GroupRequestDto request)
-        {
-            // TODO: Implement
-            
-            throw new NotImplementedException();
         }
     }
 }

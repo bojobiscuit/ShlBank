@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Implementations;
+using Api.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +12,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Repository;
+using Repository.Implementations;
+using Repository.Interfaces;
 
 namespace Api
 {
@@ -43,6 +48,12 @@ namespace Api
                 });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddTransient<ShlContext>(_ => new ShlContext(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<IBankRepository, BankRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IBankService, BankService>();
+            services.AddTransient<IBankAccountService, BankAccountService>();
+            services.AddTransient<ISubmitRequestService, SubmitRequestService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

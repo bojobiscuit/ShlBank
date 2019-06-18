@@ -15,7 +15,7 @@ namespace Repository.Interfaces
         List<TeamDto> GetTeams();
         List<UserAccountDto> GetMatchingUsers(List<string> submittedNames);
 
-        int? SubmitRequest(GroupRequestDto request);
+        int? SubmitRequest(NewGroupRequestDto request);
         int? AddBankTransaction(NewPurchaseDto purchase);
 
         void ToggleFree500(int userId);

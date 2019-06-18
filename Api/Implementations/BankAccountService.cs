@@ -13,6 +13,7 @@ namespace Api.Implementations
 
         public BankAccountService(IUserRepository userRepository, IBankRepository bankRepository)
         {
+            _userRepository = userRepository;
             _bankRepository = bankRepository;
         }
 
@@ -37,7 +38,7 @@ namespace Api.Implementations
 
         public int? AddPurchase(NewPurchaseDto purchase)
         {
-            if (IsValid(purchase))
+            if (purchase.IsValid())
             {
                 int? transactionId = _bankRepository.AddBankTransaction(purchase);
                 return transactionId;
@@ -55,11 +56,10 @@ namespace Api.Implementations
             _bankRepository.ToggleShlTraining(userId);
         }
 
-        private bool IsValid(NewPurchaseDto purchase)
+        public UserAccountDto GetUser(int userId)
         {
-            // TODO: Implement
-
-            throw new NotImplementedException();
+            UserAccountDto userAccount = _userRepository.GetUserAccount(userId);
+            return userAccount;
         }
     }
 }

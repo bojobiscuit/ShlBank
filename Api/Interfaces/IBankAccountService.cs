@@ -9,5 +9,6 @@ namespace Api.Interfaces
         int? AddPurchase(NewPurchaseDto purchase);
         void ToggleFree500(int userId);
         void ToggleShlTraining(int userId);
+        UserAccountDto GetUser(int userId);
     }
 }

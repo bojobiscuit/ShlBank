@@ -11,6 +11,7 @@ namespace Api.Implementations
 
         public BankService(IUserRepository userRepository, IBankRepository bankRepository)
         {
+            _userRepository = userRepository;
             _bankRepository = bankRepository;
         }
 

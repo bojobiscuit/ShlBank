@@ -17,10 +17,17 @@ namespace Api.Controllers
         }
 
         [HttpGet("{userId}")]
-        public ActionResult<BankAccountVM> GetBankAccount(int userId)
+        public ActionResult<BankAccountVM> GetBankAccountVM(int userId)
         {
             BankAccountVM bankAccount = _bankAccountService.GetBankAccountVM(userId);
             return bankAccount;
+        }
+
+                [HttpGet("user/{userId}")]
+        public ActionResult<UserAccountDto> GetUser(int userId)
+        {
+            UserAccountDto userAccount = _bankAccountService.GetUser(userId);
+            return userAccount;
         }
 
         [HttpPost("purchase")]
