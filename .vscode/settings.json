@@ -1,6 +1,9 @@
 {
     "files.exclude": {
         "**/bin": true,
-        "**/obj": true
+        "**/obj": true,
+        "**/.gitignore": true,
+        "**/.gitattributes": true,
+        "**/README.md": true
     }
 }
